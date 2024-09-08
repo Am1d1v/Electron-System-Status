@@ -4,11 +4,24 @@ const cpu = osu.cpu;
 const mem = osu.mem;
 const os = osu.os;
 
+// CPU Overload threshold
+let cpuOverload = 30;
+
 // Update CPU Data every 1 seconds
 setInterval(() => {
     // CPU Usage
     cpu.usage().then(info => {
         document.querySelector('#cpu-usage').innerText = info + '%';
+
+        // CPU Progress bar
+        document.querySelector('#cpu-progress').style.width = info + '%';
+
+        // Make progress bar red if overload
+        if(info > cpuOverload){
+            document.querySelector('#cpu-progress').style.backgroundColor = 'red';
+        } else {
+            document.querySelector('#cpu-progress').style.backgroundColor = '#30c88b';
+        }
     });
 
     // CPU Free
