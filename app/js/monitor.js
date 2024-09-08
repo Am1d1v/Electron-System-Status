@@ -4,6 +4,13 @@ const cpu = osu.cpu;
 const mem = osu.mem;
 const os = osu.os;
 
+// Update CPU Data every 2 seconds
+setInterval(() => {
+    // CPU Usage
+    cpu.usage().then(info => {
+        document.querySelector('#cpu-usage').innerText = info + '%';
+    });
+}, 2000);
 
 // Set model
 document.querySelector('#cpu-model').innerText = cpu.model();
