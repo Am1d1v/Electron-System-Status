@@ -2,19 +2,19 @@ const { app, BrowserWindow, Menu } = require('electron')
 const log = require('electron-log')
 
 // Set env
-process.env.NODE_ENV = 'development'
+let process = 'development'
 
-const isDev = process.env.NODE_ENV !== 'production' ? true : false
+const isDev = process !== 'production' ? true : false
 const isMac = process.platform === 'darwin' ? true : false
 
 let mainWindow
 
 function createMainWindow() {
   mainWindow = new BrowserWindow({
-    title: 'APP NAME',
-    width: isDev ? 800 : 500,
+    title: 'CPU Monitoring',
+    width: isDev ? 1800 : 900,
     height: 600,
-    icon: './assets/icons/icon.png',
+    icon: './assets/icon.png',
     resizable: isDev ? true : false,
     backgroundColor: 'white',
     webPreferences: {
