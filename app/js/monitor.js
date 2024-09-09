@@ -1,11 +1,18 @@
 const path = require('path');
 const osu = require('node-os-utils');
+const { Notification } = require('electron');
+const electron = require('electron');
 const cpu = osu.cpu;
 const mem = osu.mem;
 const os = osu.os;
 
 // CPU Overload threshold
 let cpuOverload = 30;
+
+notifyUser({
+    title: 'CPU Overload',
+    body: `CPU is over ${cpuOverload}%`
+});
 
 // Update CPU Data every 1 seconds
 setInterval(() => {
@@ -32,6 +39,7 @@ setInterval(() => {
     // System Uptime
     document.querySelector('#sys-uptime').innerText = showSystemTime(os.uptime());
 
+
 }, 1000);
 
 // Show system time
@@ -56,4 +64,7 @@ mem.info().then(info => {
     document.querySelector('#mem-total').innerText = info.totalMemMb;
 });
 
-
+// Send Notification
+function notifyUser(options){
+   new electron.remote.Notification (options.title, options).show();
+};
