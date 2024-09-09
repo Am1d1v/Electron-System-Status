@@ -9,11 +9,8 @@ const os = osu.os;
 // CPU Overload threshold
 let cpuOverload = 60;
 
-notifyUser({
-    title: 'CPU Overload',
-    body: `CPU is over ${cpuOverload}%`,
-    icon: path.join(__dirname, 'img', 'icon.png')
-});
+// CPU Overload Alert frequency in minutes
+let alertFrequency = 3;
 
 // Update CPU Data every 1 seconds
 setInterval(() => {
@@ -30,6 +27,19 @@ setInterval(() => {
         } else {
             document.querySelector('#cpu-progress').style.backgroundColor = '#30c88b';
         }
+
+        // Check overload
+        if(info > cpuOverload && runNotify(alertFrequency)){
+            notifyUser({
+                title: 'CPU Overload',
+                body: `CPU is over ${cpuOverload}%`,
+                icon: path.join(__dirname, 'img', 'icon.png')
+            });
+
+            localStorage.setItem('lastNotify', +new Date());
+            console.log(localStorage.getItem('lastNotify'));
+        }
+
     });
 
     // CPU Free
@@ -68,4 +78,24 @@ mem.info().then(info => {
 // Send Notification
 function notifyUser(options){
    new electron.remote.Notification (options.title, options).show();
+};
+
+// Check how much time has passed since notification
+function runNotify(frequency){
+    if(localStorage.getItem('lastNotify') === null){
+        // Store timestamp
+        localStorage.setItem('lastNotify', +new Date());
+        return true;
+    }
+
+    const notifyTime = new Date(parseInt(localStorage.getItem('lastNotify')));
+    const now = new Date();
+    const diffTime = Math.abs(now - notifyTime)
+    const minutesPassed = Math.ceil(diffTime / (1000 * 60));
+
+    if(minutesPassed > frequency) {
+        return true;
+    } else {
+        return false;
+    }
 };
