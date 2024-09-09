@@ -7,11 +7,12 @@ const mem = osu.mem;
 const os = osu.os;
 
 // CPU Overload threshold
-let cpuOverload = 30;
+let cpuOverload = 60;
 
 notifyUser({
     title: 'CPU Overload',
-    body: `CPU is over ${cpuOverload}%`
+    body: `CPU is over ${cpuOverload}%`,
+    icon: path.join(__dirname, 'img', 'icon.png')
 });
 
 // Update CPU Data every 1 seconds
