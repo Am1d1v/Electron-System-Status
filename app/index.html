@@ -65,10 +65,24 @@
 		<script src="js/monitor.js"></script>
 		<script>
 			const {ipcRenderer} = require('electron');
+			const settingForm = document.querySelector('#settings-form');
 
+
+			// Get Settings
 			ipcRenderer.on('settings:get', (event, settings) => {
 				document.querySelector('#cpu-overload').value = settings.cpuOverload;
 				document.querySelector('#alert-frequency').value = settings.alertFreaquency;
+			});
+
+			// Submit Settings
+			settingForm.addEventListener('submit', (event) => {
+				event.preventDefault();
+
+				const cpuOverload = document.querySelector('#cpu-overload').value;
+				const alertFrequency = document.querySelector('#alert-frequency').value;
+
+				// Send new settings to main process
+				
 			});
 		</script>
 	</body>
