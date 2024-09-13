@@ -87,7 +87,19 @@
 					alertFrequency
 				});
 
-				console.log('Settings Saved');
+				showAlert('Settings Saved');
+
+				// Show Alert for Settings
+				function showAlert(msg){
+					const alert = document.querySelector('#alert');
+					alert.classList.remove('hide');
+					alert.classList.add('alert');
+					alert.innerText = msg;
+
+					setTimeout(() => {
+						alert.classList.add('hide');
+					}, 3000);
+				};
 			});
 		</script>
 	</body>
