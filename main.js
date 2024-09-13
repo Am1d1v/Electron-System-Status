@@ -1,6 +1,7 @@
-const { app, BrowserWindow, Menu, ipcMain } = require('electron')
+const { app, BrowserWindow, Menu, ipcMain, Tray } = require('electron')
 const log = require('electron-log');
 const Store = require('./Store');
+const path = require('path');
 
 // Set env
 let process = 'development'
@@ -48,8 +49,11 @@ app.on('ready', () => {
     mainWindow.webContents.send('settings:get', store.get('settings'))
   });
 
-  const mainMenu = Menu.buildFromTemplate(menu)
-  Menu.setApplicationMenu(mainMenu)
+  const mainMenu = Menu.buildFromTemplate(menu);
+  Menu.setApplicationMenu(mainMenu);
+
+  // Tray Icon
+  const icon = path.join(__dirname, 'assets', 'icons', 'tray_icon.png');
 })
 
 const menu = [
