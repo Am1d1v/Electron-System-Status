@@ -9,7 +9,9 @@ let process = 'development'
 const isDev = process !== 'production' ? true : false
 const isMac = process.platform === 'darwin' ? true : false
 
-let mainWindow
+let mainWindow;
+let tray;
+
 
 // Init store & defaults
 const store = new Store({
@@ -53,7 +55,9 @@ app.on('ready', () => {
   Menu.setApplicationMenu(mainMenu);
 
   // Tray Icon
-  const icon = path.join(__dirname, 'assets', 'icons', 'tray_icon.png');
+  const icon = path.join(__dirname, 'assets', 'tray_icon.png');
+
+  tray = new Tray(icon);
 })
 
 const menu = [

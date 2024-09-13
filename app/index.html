@@ -70,8 +70,8 @@
 
 			// Get Settings
 			ipcRenderer.on('settings:get', (event, settings) => {
-				document.querySelector('#cpu-overload').value = settings.cpuOverload;
-				document.querySelector('#alert-frequency').value = settings.alertFreaquency;
+				document.querySelector('#cpu-overload').value = +settings.cpuOverload;
+				document.querySelector('#alert-frequency').value = +settings.alertFreaquency;
 			});
 
 			// Submit Settings
