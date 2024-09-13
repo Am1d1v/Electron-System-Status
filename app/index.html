@@ -82,7 +82,12 @@
 				const alertFrequency = document.querySelector('#alert-frequency').value;
 
 				// Send new settings to main process
-				
+				ipcRenderer.send('settings:get', {
+					cpuOverload,
+					alertFrequency
+				});
+
+				console.log('Settings Saved');
 			});
 		</script>
 	</body>
