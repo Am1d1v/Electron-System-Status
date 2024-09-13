@@ -16,7 +16,7 @@ const store = new Store({
   defaults: {
     settings: {
       cpuOverload: 80,
-      alertFreaquency: 3
+      alertFrequency: 3
     }
   }
 })

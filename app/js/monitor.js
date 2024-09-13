@@ -1,16 +1,22 @@
 const path = require('path');
 const osu = require('node-os-utils');
-const { Notification } = require('electron');
+const { Notification, ipcRenderer } = require('electron');
 const electron = require('electron');
 const cpu = osu.cpu;
 const mem = osu.mem;
 const os = osu.os;
 
 // CPU Overload threshold
-let cpuOverload = 60;
+let cpuOverload;
 
 // CPU Overload Alert frequency in minutes
-let alertFrequency = 3;
+let alertFrequency;
+
+// Get settings & values
+ipcRenderer.on('settings:get', (event, settings) => {
+    cpuOverload = +settings.cpuOverload;
+    alertFrequency = +settings.alertFrequency;
+});
 
 // Update CPU Data every 1 seconds
 setInterval(() => {
