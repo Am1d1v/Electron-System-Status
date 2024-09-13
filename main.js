@@ -32,6 +32,8 @@ function createMainWindow() {
     icon: './assets/icon.png',
     resizable: isDev ? true : false,
     backgroundColor: 'white',
+    show: false,
+    opacity: 0.9,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -56,8 +58,16 @@ app.on('ready', () => {
 
   // Tray Icon
   const icon = path.join(__dirname, 'assets', 'tray_icon.png');
-
   tray = new Tray(icon);
+
+  tray.on('click', () => {
+    // Tray Visibilty toggle 
+    if(mainWindow.isVisible() === true){
+      mainWindow.hide();
+    } else {
+      mainWindow.show();
+    }
+  });
 })
 
 const menu = [
