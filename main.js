@@ -103,6 +103,15 @@ const menu = [
   {
     role: 'fileMenu',
   },
+  {
+    label: 'View', 
+    submenu: [
+      {
+        label: 'Toggle Navigation',
+        click: () => mainWindow.webContents.send('nav:toggle')
+      }
+    ]
+  },
   ...(isDev
     ? [
         {
