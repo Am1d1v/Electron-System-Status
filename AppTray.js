@@ -4,6 +4,9 @@ class AppTray extends Tray{
     constructor(icon, mainWindow){
         super(icon);
 
+        // Set text hover tray icon
+        this.setToolTip('SystemStatus');
+
         this.mainWindow = mainWindow;
 
         this.on('click', this.onClick.bind(this));
