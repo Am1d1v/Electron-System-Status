@@ -53,34 +53,7 @@ app.on('ready', () => {
   const icon = path.join(__dirname, 'assets', 'tray_icon.png');
   tray = new AppTray(icon, mainWindow);
 
-  tray.on('click', () => {
-    // Tray Visibilty toggle 
-    if(mainWindow.isVisible() === true){
-      mainWindow.hide();
-    } else {
-      mainWindow.show();
-    }
-  });
-
-  // Close Tray on Right Click
-  tray.on('right-click', () => {
-
-    const context = Menu.buildFromTemplate([
-      {
-        label: 'Quit',
-        click: () => {
-          app.isQuitting = true;
-          app.quit();
-        }
-      }
-    ]);
-
-    // Show PopUp Menu on Right Click
-    tray.popUpContextMenu(context);
-
-  });
-
-})
+});
 
 const menu = [
   ...(isMac ? [{ role: 'appMenu' }] : []),
