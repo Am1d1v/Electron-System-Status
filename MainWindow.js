@@ -2,7 +2,7 @@ const {BrowserWindow} = require('electron');
 
 
 class MainWindow extends BrowserWindow {
-    constructor(){
+    constructor(file, isDev){
         super(
             {
                 title: 'CPU Monitoring',
@@ -18,7 +18,16 @@ class MainWindow extends BrowserWindow {
                 }
               }
         );
-    }
+
+        this.loadFile(file);
+
+        if (isDev) {
+            this.webContents.openDevTools()
+          };
+
+    };
 
 
 };
+
+module.exports = MainWindow;

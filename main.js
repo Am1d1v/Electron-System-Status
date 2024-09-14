@@ -2,6 +2,7 @@ const { app, BrowserWindow, Menu, ipcMain, Tray } = require('electron')
 const log = require('electron-log');
 const Store = require('./Store');
 const path = require('path');
+const MainWindow = require('./MainWindow');
 
 // Set env
 let process = 'development'
@@ -25,13 +26,7 @@ const store = new Store({
 })
 
 function createMainWindow() {
-  mainWindow = new BrowserWindow();
-
-  if (isDev) {
-    mainWindow.webContents.openDevTools()
-  }
-
-  mainWindow.loadFile('./app/index.html')
+  mainWindow = new MainWindow('./app/index.html', isDev);
 }
 
 app.on('ready', () => {
