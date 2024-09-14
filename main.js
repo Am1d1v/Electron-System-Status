@@ -1,8 +1,9 @@
-const { app, BrowserWindow, Menu, ipcMain, Tray } = require('electron')
+const { app, BrowserWindow, Menu, ipcMain } = require('electron')
 const log = require('electron-log');
 const Store = require('./Store');
 const path = require('path');
 const MainWindow = require('./MainWindow');
+const AppTray = require('./AppTray');
 
 // Set env
 let process = 'development'
@@ -50,7 +51,7 @@ app.on('ready', () => {
 
   // Tray Icon
   const icon = path.join(__dirname, 'assets', 'tray_icon.png');
-  tray = new Tray(icon);
+  tray = new AppTray(icon, mainWindow);
 
   tray.on('click', () => {
     // Tray Visibilty toggle 
