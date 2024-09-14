@@ -33,7 +33,7 @@ function createMainWindow() {
     resizable: isDev ? true : false,
     backgroundColor: 'white',
     show: false,
-    opacity: 0.9,
+    opacity: 1,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -68,6 +68,22 @@ app.on('ready', () => {
       mainWindow.show();
     }
   });
+
+  // Close Tray on Right Click
+  tray.on('right-click', () => {
+
+    const context = Menu.buildFromTemplate([
+      {
+        label: 'Quit',
+        click: () => {
+          app.isQuitting = true;
+          app.quit();
+        }
+      }
+    ])
+
+  });
+
 })
 
 const menu = [
