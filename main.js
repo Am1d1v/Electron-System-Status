@@ -56,6 +56,15 @@ app.on('ready', () => {
   const mainMenu = Menu.buildFromTemplate(menu);
   Menu.setApplicationMenu(mainMenu);
 
+  mainMenu.on('close', (event) => {
+    if(!app.isQuitting){
+      event.preventDefault();
+      mainWindow.hide();
+    }
+
+    return true;
+  });
+
   // Tray Icon
   const icon = path.join(__dirname, 'assets', 'tray_icon.png');
   tray = new Tray(icon);
