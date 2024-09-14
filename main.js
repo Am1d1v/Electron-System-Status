@@ -80,7 +80,10 @@ app.on('ready', () => {
           app.quit();
         }
       }
-    ])
+    ]);
+
+    // Show PopUp Menu on Right Click
+    tray.popUpContextMenu(context);
 
   });
 
